@@ -1,4 +1,5 @@
 <!DOCTYPE hyml>
+
 <html>
 
 <head>
@@ -20,6 +21,7 @@
 </head>
 
 <body>
+
 	<!-- Top NavBar -->
 	<header class="mdc-top-app-bar app-bar" id="app-bar">
 		<div class="mdc-top-app-bar__row">
@@ -35,17 +37,17 @@
 	<aside class="mdc-drawer mdc-drawer--dismissible mdc-top-app-bar--fixed-adjust">
 		<div class="mdc-drawer__content">
 			<div class="mdc-list">
-				<a class="mdc-list-item mdc-list-item--activated" href="#" aria-current="page">
+				<a class="mdc-list-item mdc-list-item--activated" href="#Home" data-toScreen="Home" aria-current="page">
 					<span class="mdc-list-item__ripple"></span>
 					<i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
 					<span class="mdc-list-item__text">Home</span>
 				</a>
-				<a class="mdc-list-item" href="#">
+				<a class="mdc-list-item" href="#News" data-toScreen="News">
 					<span class="mdc-list-item__ripple"></span>
 					<i class="material-icons mdc-list-item__graphic" aria-hidden="true">article</i>
 					<span class="mdc-list-item__text">News</span>
 				</a>
-				<a class="mdc-list-item" href="#">
+				<a class="mdc-list-item" href="#Map" data-toScreen="Map">
 					<span class="mdc-list-item__ripple"></span>
 					<i class="material-icons mdc-list-item__graphic" aria-hidden="true">map</i>
 					<span class="mdc-list-item__text">Map</span>
@@ -58,15 +60,29 @@
 	<!-- Main Content Start -->
 	<div class="mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
 		<main class="main-content" id="main-content">
-
 			<!-- Home Page Start-->
-			<div class="mdc-top-app-bar--fixed-adjust" id="input">
-				<h2>Welcome to Biking Helper</h2>
-				<p>Sample Text</p>
+			<div class="mdc-top-app-bar--fixed-adjust myPage" id="Home">
+
+				<h1>Welcome to Biking Helper</h1>
+				<h2>This site will help you find recent biking incidents and bike racks in the Chicagoland area. Click on the top left menu to start exploring.</h2>
 			</div>
 			<!-- Home Page Start-->
 
-			<div class="mdc-top-app-bar--fixed-adjust" id="input" style="display: none;">
+			<!-- News Page Start-->
+			<div class="mdc-top-app-bar--fixed-adjust myPage" id="News" style="display: none;">
+
+				<h1>This is the News Screen</h1>
+			</div>
+			<!-- News Page Start-->
+
+			<!-- Map Page Start-->
+			<div class="mdc-top-app-bar--fixed-adjust myPage" id="Map" style="display: none;">
+
+				<h1>This is the Map Screen</h1>
+			</div>
+			<!-- Map Page Start-->
+
+			<div class="mdc-top-app-bar--fixed-adjust myPage" id="input" style="display: none;">
 				<label class="mdc-text-field mdc-text-field--filled">
 					<span class="mdc-text-field__ripple"></span>
 					<span class="mdc-floating-label" id="my-label-id">Enter your name</span>

@@ -27,3 +27,15 @@ document.querySelector(".foo-button").addEventListener("click", evt => {
 		"You entered: " + document.querySelector("input").value;
 	snackbar.open();
 });
+
+var links = document.querySelectorAll(".mdc-list-item");
+links.forEach( link => {
+	link.addEventListener("click", e => {
+		var name = link.getAttribute("data-toScreen");
+		document.querySelectorAll(".myPage").forEach(page => { 
+			page.style.display = "none";
+		});
+		document.querySelector(".myPage#" + name).style.display = "block";
+
+	});
+});

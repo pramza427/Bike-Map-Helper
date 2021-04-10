@@ -13,15 +13,9 @@
 body {
   display: flex;
   height: 100vh;
+  width: 100%;
   margin: 0px;
 }
-main{
-	height: 100%;
-	width: 100%;
-	margin: auto;
-	padding: 20px;
-}
-
 .mdc-drawer-app-content {
   flex: auto;
   overflow: auto;
@@ -29,10 +23,8 @@ main{
 }
 
 .main-content {
-	margin: 0px;
-  overflow: auto;
-  height: auto;
-  width: 100%;
+	margin: 0px 5% 0px 5%; 
+	height: 95%;
 }
 
 .app-bar {
