@@ -1,5 +1,14 @@
-@use "./node_modules/@material/icon-button";
-@use "./node_modules/@material/top-app-bar/mdc-top-app-bar";
-
-@include icon-button.core-styles;
-
+.center{
+	width: 100%;
+	height: 100%;
+	margin-top: auto;
+	text-align: center;
+	padding: 8px;
+}
+body{
+	width: 100%;
+	height: 90%;
+}
+html{
+	height: 100%;
+}

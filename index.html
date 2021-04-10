@@ -20,42 +20,42 @@
 </head>
 
 <body>
-	<!--------------- Start Navbar --------------->
-	<header class="mdc-top-app-bar">
-		<div class="mdc-top-app-bar__row">
-			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-				<button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu">menu</button>
-				<span class="mdc-top-app-bar__title">Page title</span>
-			</section>
-			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-				<button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Favorite">favorite</button>
-				<button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Search">search</button>
-				<button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Options">more_vert</button>
-			</section>
-		</div>
-	</header>
-	
-	<!--------------- End Navbar --------------->
-	<main class="mdc-top-app-bar--fixed-adjust">
-		<label class="mdc-text-field mdc-text-field--filled">
-		    <span class="mdc-text-field__ripple"></span>
-		    <span class="mdc-floating-label" id="my-label-id">Hint text</span>
-		    <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
-		    <span class="mdc-line-ripple"></span>
-		</label>
-		<div class="mdc-touch-target-wrapper">
-		    <button class="mdc-button mdc-button--touch">
-		    	<span class="mdc-button__ripple"></span>
-		    	<span class="mdc-button__label">My Accessible Button</span>
-		    	<span class="mdc-button__touch"></span>
-		    </button>
-		</div>
-	</main>
+	<div class="center">
+	<label class="mdc-text-field mdc-text-field--filled">
+  		<span class="mdc-text-field__ripple"></span>
+  		<span class="mdc-floating-label" id="my-label-id">Enter your name</span>
+  		<input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+  		<span class="mdc-line-ripple"></span>
+	</label>
+	<br>
+	<button class="mdc-button mdc-button--raised foo-button">
+  		<span class="mdc-button__label">Show SnackBar</span>
+	</button>
 
+	</div>
+
+	<div class="mdc-snackbar">
+  		<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+    		<div class="mdc-snackbar__label center" aria-atomic="false">
+      			Nothing was entered
+    		</div>
+  		</div>
+	</div>
 </body>
 
 </html>
 
 <script>
 
+	
+
+	document.querySelector(".mdc-button").addEventListener("click", evt => {
+		document.querySelector(".mdc-snackbar__label").innerHTML = 
+			"You entered: " + document.querySelector("input").value;
+		snackbar.open();
+	});
 </script>
+
+<style>
+
+</style>
