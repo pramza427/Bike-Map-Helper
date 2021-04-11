@@ -1,8 +1,14 @@
 // Instantiation
-const textField = new mdc.textField.MDCTextField(document.querySelector('.mdc-text-field'));
+const textFields = document.querySelectorAll('.mdc-text-field');
+textFields.forEach(text => {
+	new mdc.textField.MDCTextField(text);
+});
+
 const snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector('.mdc-snackbar'));
+
 // Set text input bar to ripple
 mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button'));
+
 const list = mdc.list.MDCList.attachTo(document.querySelector('.mdc-list'));
 list.wrapFocus = true;
 const drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
@@ -13,6 +19,11 @@ topAppBar.setScrollTarget(document.getElementById('main-content'));
 topAppBar.listen('MDCTopAppBar:nav', () => {
   drawer.open = !drawer.open;
 });
+
+// checkbox and form
+const checkbox = new mdc.checkbox.MDCCheckbox(document.querySelector('.mdc-checkbox'));
+const formField = new mdc.formField.MDCFormField(document.querySelector('.mdc-form-field'));
+formField.input = checkbox;
 
 // Left bar list and listener
 const listEl = document.querySelector('.mdc-drawer .mdc-list');
@@ -39,3 +50,12 @@ links.forEach( link => {
 
 	});
 });
+
+function initMap(){
+    const Chicago = { lat: 41.878 , lng: -87.629 };
+    // The map, centered at Chicago
+    myMap = new google.maps.Map(document.getElementById("Map"), {
+      zoom: 10,
+      center: Chicago,
+    });
+}

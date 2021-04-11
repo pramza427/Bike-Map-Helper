@@ -16,6 +16,13 @@ body {
   width: 100%;
   margin: 0px;
 }
+#Map{
+	height: 100%;
+}
+
+.mdc-text-field{
+	margin: 5%;
+}
 .mdc-drawer-app-content {
   flex: auto;
   overflow: auto;
@@ -23,7 +30,7 @@ body {
 }
 
 .main-content {
-	margin: 0px 5% 0px 5%; 
+	margin: 5%; 
 	height: 95%;
 }
 
