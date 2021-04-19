@@ -83,118 +83,162 @@
 			<div class="mdc-top-app-bar--fixed-adjust myPage" id="News" style="display: none;">
 
 				<h1>This is the News Screen</h1>
+				<div class="mdc-card">  <!-- Card Start -->
+					<div class="mdc-card__text-wrapper">
+						<div class="mdc-card__title">Card Title</div>
+						<div class="mdc-card__subtitle">Card Subtitle</div>
+					</div>
+					<div class="mdc-card__text-wrapper">
+						<div class="mdc-card__description">This is describing the incident</div>
+					</div>
+				</div> <!-- Card End -->
 			</div>
-			<!-- News Page Start-->
+				<!-- News Page End -->
 
-			<!-- Map Page Start-->
-			<div class="mdc-top-app-bar--fixed-adjust myPage" id="Map" style="display: none;">
+				<!-- Map Page Start-->
+				<div class="mdc-top-app-bar--fixed-adjust myPage" id="Map" style="display: none;">
 
-				<h1>This is the Map Screen</h1>
-				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtemI2wGOdaB-bZLurssCbWR3J1335ULY&callback=initMap&libraries=&v=weekly" async></script>
-			</div>
-			<!-- Map Page End-->
-
-			<div class="mdc-top-app-bar--fixed-adjust myPage" id="Filters" style="display: none;">
-				<h3>Here you can filter what data you want to see using the filters bellow</h3>
-
-
-				<label class="mdc-text-field mdc-text-field--filled">
-					<span class="mdc-text-field__ripple"></span>
-					<span class="mdc-floating-label" id="my-label-id">Enter a zipcode</span>
-					<input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
-					<span class="mdc-line-ripple"></span>
-				</label>
-
-				<label class="mdc-text-field mdc-text-field--filled">
-					<span class="mdc-text-field__ripple"></span>
-					<span class="mdc-floating-label" id="my-label-id">Proximity in miles</span>
-					<input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
-					<span class="mdc-line-ripple"></span>
-				</label>
-
-				<br>
-				<h3>Incident type:</h3>
-				<!-- CheckBox 1 -->
-				<div class="mdc-form-field">
-					<div class="mdc-checkbox">
-						<input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-1"/>
-						<div class="mdc-checkbox__background">
-							<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-								<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-							</svg>
-							<div class="mdc-checkbox__mixedmark"></div>
-						</div>
-						<div class="mdc-checkbox__ripple"></div>
-					</div>
-					<label for="checkbox-1">Crash</label>
+					<h1>This is the Map Screen</h1>
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtemI2wGOdaB-bZLurssCbWR3J1335ULY&callback=initMap&libraries=&v=weekly" async></script>
 				</div>
-				<!-- CheckBox 1 -->
-				<!-- CheckBox 2 -->
-				<div class="mdc-form-field">
-					<div class="mdc-checkbox">
-						<input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-1"/>
-						<div class="mdc-checkbox__background">
-							<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-								<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-							</svg>
-							<div class="mdc-checkbox__mixedmark"></div>
-						</div>
-						<div class="mdc-checkbox__ripple"></div>
-					</div>
-					<label for="checkbox-1">Hazard</label>
-				</div>
-				<!-- CheckBox 2 -->
-				<!-- CheckBox 3 -->
-				<div class="mdc-form-field">
-					<div class="mdc-checkbox">
-						<input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-1"/>
-						<div class="mdc-checkbox__background">
-							<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-								<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-							</svg>
-							<div class="mdc-checkbox__mixedmark"></div>
-						</div>
-						<div class="mdc-checkbox__ripple"></div>
-					</div>
-					<label for="checkbox-1">Theft</label>
-				</div>
-				<!-- CheckBox 3 -->
-				<!-- CheckBox 3 -->
-				<div class="mdc-form-field">
-					<div class="mdc-checkbox">
-						<input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-1"/>
-						<div class="mdc-checkbox__background">
-							<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-								<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-							</svg>
-							<div class="mdc-checkbox__mixedmark"></div>
-						</div>
-						<div class="mdc-checkbox__ripple"></div>
-					</div>
-					<label for="checkbox-1">Unconfirmed</label>
-				</div>
-				<!-- CheckBox 3 -->
-				<br>
-				<button class="mdc-button mdc-button--raised foo-button">
-					<span class="mdc-button__label">Show SnackBar</span>
-				</button>
+				<!-- Map Page End-->
 
-				<div class="mdc-snackbar">
-					<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
-						<div class="mdc-snackbar__label center" aria-atomic="false">
-							Nothing was entered
+				<div class="mdc-top-app-bar--fixed-adjust myPage" id="Filters" style="display: none;">
+					<h3>Here you can filter what data you want to see using the filters bellow</h3>
+
+
+					<label class="mdc-text-field mdc-text-field--filled">
+						<span class="mdc-text-field__ripple"></span>
+						<span class="mdc-floating-label" id="my-label-id">Enter a zipcode</span>
+						<input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+						<span class="mdc-line-ripple"></span>
+					</label>
+
+					<label class="mdc-text-field mdc-text-field--filled">
+						<span class="mdc-text-field__ripple"></span>
+						<span class="mdc-floating-label" id="my-label-id">Proximity in miles</span>
+						<input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+						<span class="mdc-line-ripple"></span>
+					</label>
+
+					<br>
+					<h3>Incident type:</h3>
+					<!-- CheckBox 1 -->
+					<div class="mdc-form-field">
+						<div class="mdc-checkbox">
+							<input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-1"/>
+							<div class="mdc-checkbox__background">
+								<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+									<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+								</svg>
+								<div class="mdc-checkbox__mixedmark"></div>
+							</div>
+							<div class="mdc-checkbox__ripple"></div>
+						</div>
+						<label for="checkbox-1">Crash</label>
+					</div>
+					<!-- CheckBox 1 -->
+					<!-- CheckBox 2 -->
+					<div class="mdc-form-field">
+						<div class="mdc-checkbox">
+							<input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-1"/>
+							<div class="mdc-checkbox__background">
+								<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+									<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+								</svg>
+								<div class="mdc-checkbox__mixedmark"></div>
+							</div>
+							<div class="mdc-checkbox__ripple"></div>
+						</div>
+						<label for="checkbox-1">Hazard</label>
+					</div>
+					<!-- CheckBox 2 -->
+					<!-- CheckBox 3 -->
+					<div class="mdc-form-field">
+						<div class="mdc-checkbox">
+							<input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-1"/>
+							<div class="mdc-checkbox__background">
+								<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+									<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+								</svg>
+								<div class="mdc-checkbox__mixedmark"></div>
+							</div>
+							<div class="mdc-checkbox__ripple"></div>
+						</div>
+						<label for="checkbox-1">Theft</label>
+					</div>
+					<!-- CheckBox 3 -->
+					<!-- CheckBox 3 -->
+					<div class="mdc-form-field">
+						<div class="mdc-checkbox">
+							<input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-1"/>
+							<div class="mdc-checkbox__background">
+								<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+									<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+								</svg>
+								<div class="mdc-checkbox__mixedmark"></div>
+							</div>
+							<div class="mdc-checkbox__ripple"></div>
+						</div>
+						<label for="checkbox-1">Unconfirmed</label>
+					</div>
+					<!-- CheckBox 3 -->
+					<br>
+					<button class="mdc-button mdc-button--raised foo-button">
+						<span class="mdc-button__label">Show SnackBar</span>
+					</button>
+
+					<div class="mdc-snackbar">
+						<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+							<div class="mdc-snackbar__label center" aria-atomic="false">
+								Nothing was entered
+							</div>
 						</div>
 					</div>
+					<!-- Input Page End -->
+
 				</div>
-				<!-- Input Page End -->
+			</main>
+		</div>
+		<!-- Main Content End -->
+	</body>
 
-			</div>
-		</main>
-	</div>
-	<!-- Main Content End -->
-</body>
+	</html>
 
-</html>
+	<!-- My Script -->
+	<script src="app.js"></script>
+	<script type="text/javascript">
+		let file="https://bikewise.org:443/api/v2/incidents?page=1&proximity=Chicago%2C%20IL&proximity_square=30"
+      fetch (file)
+      .then(x => { 
+              return x.json()
+            })
+      .then(json => {
+              let i = 0;
+              let originalCard = document.querySelector(".mdc-card");
+              for(i = 0; i < json.incidents.length; i++){
+                let copy = originalCard.cloneNode(true);
+                copy.querySelector(".mdc-card__title").innerHTML = json.incidents[i].title;
+                let unix = json.incidents[i].occurred_at;
+                var date = new Date(unix*1000);
+                var formatedDate = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear() + "   " + date.getHours() + ":" + date.getMinutes();
+                copy.querySelector(".mdc-card__subtitle").innerHTML = formatedDate;
+                //copy.querySelector("p").innerHTML = innerText;
+                copy.querySelector(".mdc-card__description").innerHTML = json.incidents[i].description;
+                document.querySelector("#News").appendChild(copy);
+                console.log("added: " + copy);
 
-<!-- My Script -->
-<script src="app.js"></script>
+              }
+              originalCard.remove();
+              
+            });
+
+  function initMap(){
+    const Chicago = { lat: 41.878 , lng: -87.629 };
+    // The map, centered at Chicago
+    myMap = new google.maps.Map(document.getElementById("Map"), {
+      zoom: 12,
+      center: Chicago,
+    });
+	}
+	</script>

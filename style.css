@@ -12,7 +12,7 @@
 
 body {
   display: flex;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   margin: 0px;
 }
@@ -31,7 +31,7 @@ body {
 
 .main-content {
 	margin: 5%; 
-	height: 95%;
+	height: 90%;
 }
 
 .app-bar {
@@ -40,4 +40,22 @@ body {
 
 .mdc-top-app-bar {
   z-index: 7;
+}
+
+.mdc-card {
+  margin: 16px;
+}
+.mdc-card__text-wrapper {
+  padding: 16px;
+}
+.mdc-card__title {
+  font-size: 30px;
+}
+.mdc-card__subtitle {
+  font-size: 20px;
+  color: gray;
+}
+.mdc-card__description {
+  font-size: 20px;
+  color: gray;
 }

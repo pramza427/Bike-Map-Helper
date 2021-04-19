@@ -51,11 +51,3 @@ links.forEach( link => {
 	});
 });
 
-function initMap(){
-    const Chicago = { lat: 41.878 , lng: -87.629 };
-    // The map, centered at Chicago
-    myMap = new google.maps.Map(document.getElementById("Map"), {
-      zoom: 10,
-      center: Chicago,
-    });
-}
