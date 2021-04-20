@@ -21,7 +21,7 @@ body {
 }
 
 .mdc-text-field{
-	margin: 5%;
+	margin: 16px;
 }
 .mdc-drawer-app-content {
   flex: auto;
@@ -57,5 +57,12 @@ body {
 }
 .mdc-card__description {
   font-size: 20px;
-  color: gray;
+  color: #1B1B1B;
+}
+.mdc-card__address {
+  font-size: 20px;
+  color: darkgray;
+}
+.mdc-card__address:hover {
+  color: #1B1B1B;
 }

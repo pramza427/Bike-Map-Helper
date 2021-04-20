@@ -3,7 +3,7 @@
 <html>
 
 <head>
-	<title>Project 3</title>
+	<title>Biking Helper</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -58,7 +58,7 @@
 					<i class="material-icons mdc-list-item__graphic" aria-hidden="true">list</i>
 					<span class="mdc-list-item__text">List</span>
 				</a>
-				<a class="mdc-list-item" href="#Map" data-toScreen="Map">
+				<a class="mdc-list-item" id="ListMap" href="#Map" data-toScreen="Map">
 					<span class="mdc-list-item__ripple"></span>
 					<i class="material-icons mdc-list-item__graphic" aria-hidden="true">map</i>
 					<span class="mdc-list-item__text">Map</span>
@@ -82,11 +82,12 @@
 			<!-- News Page Start-->
 			<div class="mdc-top-app-bar--fixed-adjust myPage" id="News" style="display: none;">
 
-				<h1>This is the News Screen</h1>
+				<h1>Recent biking incidents around Chicago</h1>
 				<div class="mdc-card">  <!-- Card Start -->
 					<div class="mdc-card__text-wrapper">
 						<div class="mdc-card__title">Card Title</div>
 						<div class="mdc-card__subtitle">Card Subtitle</div>
+						<div class="mdc-card__address">Address</div>
 					</div>
 					<div class="mdc-card__text-wrapper">
 						<div class="mdc-card__description">This is describing the incident</div>
@@ -208,6 +209,12 @@
 	<!-- My Script -->
 	<script src="app.js"></script>
 	<script type="text/javascript">
+
+		// initailize Google Map
+		var myMap;
+		var mapMarkerNews;
+
+		// populate news cards
 		let file="https://bikewise.org:443/api/v2/incidents?page=1&proximity=Chicago%2C%20IL&proximity_square=30"
       fetch (file)
       .then(x => { 
@@ -221,24 +228,67 @@
                 copy.querySelector(".mdc-card__title").innerHTML = json.incidents[i].title;
                 let unix = json.incidents[i].occurred_at;
                 var date = new Date(unix*1000);
-                var formatedDate = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear() + "   " + date.getHours() + ":" + date.getMinutes();
+                var minute = date.getMinutes();
+                if(minute < 10){
+                	minute = "0"+minute;
+                }
+                var formatedDate = date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + "     " + date.getHours() + ":" + minute;
                 copy.querySelector(".mdc-card__subtitle").innerHTML = formatedDate;
-                //copy.querySelector("p").innerHTML = innerText;
+                copy.querySelector(".mdc-card__address").innerHTML = json.incidents[i].address;
                 copy.querySelector(".mdc-card__description").innerHTML = json.incidents[i].description;
                 document.querySelector("#News").appendChild(copy);
                 console.log("added: " + copy);
 
+                // When address is clicked, bring up map with that address
+                copy.querySelector(".mdc-card__address").addEventListener("click", evt => {
+                	// send address to google geocode api and 
+                	// get lat and longitude back
+                	var link = "https://maps.googleapis.com/maps/api/geocode/json?address="
+                	var key = "&key=AIzaSyAa4uCys20g6sytzES1nTnp-dojJ6H1avg"
+                	var address = evt.target.innerHTML;
+                	link = link + address + key;
+                	fetch(link)
+                	.then(z => {
+                					return z.json()
+                				})
+                	.then(zjson => {
+                					if(zjson.status === "OK"){
+                						// remove old marker if there
+                						if(mapMarkerNews != null){
+                							mapMarkerNews.setMap(null);
+                						}
+                						// set new cords
+                						var latitude = zjson.results[0].geometry.location.lat;
+                						var longitude = zjson.results[0].geometry.location.lng;
+                						var cords = { lat: latitude, lng: longitude};
+    												myMap.setCenter(cords);
+
+    												// place marker at cords
+    												var marker = new google.maps.Marker({
+    													position: cords,
+													    map: myMap,
+													    title: "address",
+													  });
+    												mapMarkerNews = marker;
+    												// bring up map
+    												document.querySelector("#ListMap").click();
+                					}
+                					console.log(zjson);
+                				});
+                });
               }
               originalCard.remove();
               
             });
 
-  function initMap(){
-    const Chicago = { lat: 41.878 , lng: -87.629 };
-    // The map, centered at Chicago
-    myMap = new google.maps.Map(document.getElementById("Map"), {
-      zoom: 12,
-      center: Chicago,
-    });
-	}
+      function initMap(){
+	    const Chicago = { lat: 41.878 , lng: -87.629 };
+	    // The map, centered at Chicago
+	    myMap = new google.maps.Map(document.getElementById("Map"), {
+	      zoom: 12,
+	      center: Chicago,
+	    });
+		}
+
+  
 	</script>
