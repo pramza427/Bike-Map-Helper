@@ -51,3 +51,25 @@ links.forEach( link => {
 	});
 });
 
+// Create a database
+const db = new Dexie('My Database');
+db.version(3).stores({
+	racks: 'address,ward,latitude, longitude, name'
+});
+
+// get the Schools data and populate the database
+fetch("https://data.cityofchicago.org/resource/cbyb-69xx.json")
+.then ( (response) => {return response.json() })
+.then ( (result) => {
+ 	for(rack of result){
+   		db.racks.put({address: rack.address, 	
+   						ward: rack.ward, 
+   						latitude: parseFloat(rack.latitude),
+   						longitude: parseFloat(rack.longitude),
+   						name: rack.community_name});		
+   	}
+});
+
+
+
+
