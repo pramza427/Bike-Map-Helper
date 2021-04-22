@@ -195,15 +195,15 @@
 			<!-- Input Page End -->
 
 			<!-- Map Page Start-->
-				<div class="mdc-top-app-bar--fixed-adjust myPage" id="Map" style="display: none;">
+			<div class="mdc-top-app-bar--fixed-adjust myPage" id="Map" style="display: none;">
 
-					<h1>This is the Map Screen</h1>
-					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtemI2wGOdaB-bZLurssCbWR3J1335ULY&callback=initMap&libraries=&v=weekly" async></script>
-					<script type="text/javascript">
-						var myMap;
+				<h1>This is the Map Screen</h1>
+				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtemI2wGOdaB-bZLurssCbWR3J1335ULY&callback=initMap&libraries=&v=weekly" async></script>
+				<script type="text/javascript">
+					var myMap;
 
-						function initMap(){
-							const Chicago = { lat: 41.878 , lng: -87.629 };
+					function initMap(){
+						const Chicago = { lat: 41.878 , lng: -87.629 };
 					    // The map, centered at Chicago
 					    myMap = new google.maps.Map(document.getElementById("Map"), {
 					    	zoom: 12,
@@ -213,27 +213,34 @@
 					</script>
 				</div>
 				<!-- Map Page End-->
-		</main>
-	</div>
-	<!-- Main Content End -->
-</body>
+			</main>
+		</div>
+		<!-- Main Content End -->
+	</body>
 
-</html>
+	</html>
 
-<!-- My Script -->
-<script src="app.js"></script>
-<script type="text/javascript">
+	<!-- My Script -->
+	<script src="app.js"></script>
+	<script type="text/javascript">
 
 	// List schools that start with the letter K
 	db.racks.where("ward").equals("2").each(function(rack){
    	// place marker at cords
    	var cords = { lat: rack.latitude, lng: rack.longitude};
-    var marker = new google.maps.Marker({
-    	position: cords,
-    	map: myMap,
-    	title: "address",
-    });
-	});
+   	var marker = new google.maps.Marker({
+   		position: cords,
+   		map: myMap,
+   	});
+   	let infowindow = new google.maps.InfoWindow({
+   		content: rack.address
+   	})
+
+   	marker.addListener("click", () => {
+   		infowindow.open(myMap, marker);
+   	});
+
+   });
 		// initailize Google Map
 		
 		var mapMarkerNews;
@@ -294,6 +301,14 @@
     													title: "address",
     												});
     												mapMarkerNews = marker;
+
+    												let infowindow = new google.maps.InfoWindow({
+    													content: copy.innerHTML
+    												})
+
+    												marker.addListener("click", () => {
+    													infowindow.open(myMap, marker);
+    												});
     												// bring up map
     												document.querySelector("#ListMap").click();
     											}
