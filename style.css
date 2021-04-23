@@ -42,6 +42,11 @@ body {
   z-index: 7;
 }
 
+#checkboxDiv {
+  padding-bottom: 16px;
+  padding-left: 16px;
+}
+
 .mdc-card {
   margin: 16px;
 }
@@ -50,6 +55,9 @@ body {
 }
 .mdc-card__title {
   font-size: 30px;
+}
+.mdc-card__type {
+  font-size: 20px;
 }
 .mdc-card__subtitle {
   font-size: 20px;

@@ -4,8 +4,6 @@ textFields.forEach(text => {
 	new mdc.textField.MDCTextField(text);
 });
 
-const snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector('.mdc-snackbar'));
-
 // Set text input bar to ripple
 mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button'));
 
@@ -33,10 +31,18 @@ document.body.addEventListener('MDCDrawer:closed', () => {
   mainContentEl.querySelector('input, button').focus();
 });
 
+// click Listener for Filter's list button
 document.querySelector(".foo-button").addEventListener("click", evt => {
-		document.querySelector(".mdc-snackbar__label").innerHTML = 
-		"You entered: " + document.querySelector("input").value;
-	snackbar.open();
+		inLocation = document.querySelector("#location").value;
+		if(inLocation === "")
+			inLocation = "Chicago IL";
+		inProximity = document.querySelector("#proximity").value;
+		if(inProximity === "")
+			inProximity = "30";
+		inBefore = document.querySelector("#before").value;
+		inAfter = document.querySelector("#after").value;
+		console.log(inLocation, inProximity, inAfter, inBefore);
+
 });
 
 var links = document.querySelectorAll(".mdc-list-item");

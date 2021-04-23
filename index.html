@@ -88,6 +88,7 @@
 				<div class="mdc-card">  <!-- Card Start -->
 					<div class="mdc-card__text-wrapper">
 						<div class="mdc-card__title">Card Title</div>
+						<div class="mdc-card__type">Card Indident Type</div>
 						<div class="mdc-card__subtitle">Card Subtitle</div>
 						<div class="mdc-card__address">Address</div>
 					</div>
@@ -102,95 +103,106 @@
 			<div class="mdc-top-app-bar--fixed-adjust myPage" id="Filters" style="display: none;">
 				<h3>Here you can filter what data you want to see using the filters bellow</h3>
 
-
+				<h2>Location:</h2>
 				<label class="mdc-text-field mdc-text-field--filled">
 					<span class="mdc-text-field__ripple"></span>
-					<span class="mdc-floating-label" id="my-label-id">Enter a zipcode</span>
-					<input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+					<span class="mdc-floating-label" id="label-location">Enter a location</span>
+					<input id="location" class="mdc-text-field__input" type="text" aria-labelledby="label-location">
 					<span class="mdc-line-ripple"></span>
 				</label>
 
 				<label class="mdc-text-field mdc-text-field--filled">
 					<span class="mdc-text-field__ripple"></span>
-					<span class="mdc-floating-label" id="my-label-id">Proximity in miles</span>
-					<input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+					<span class="mdc-floating-label" id="label-proximity">Proximity in miles</span>
+					<input id="proximity" class="mdc-text-field__input" type="text" aria-labelledby="label-proximity">
 					<span class="mdc-line-ripple"></span>
 				</label>
 
-				<br>
-				<h3>Incident type:</h3>
-				<!-- CheckBox 1 -->
-				<div class="mdc-form-field">
-					<div class="mdc-checkbox">
-						<input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-1"/>
-						<div class="mdc-checkbox__background">
-							<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-								<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-							</svg>
-							<div class="mdc-checkbox__mixedmark"></div>
+				<h2>Time:</h2>
+				<label class="mdc-text-field mdc-text-field--filled">
+					<span class="mdc-text-field__ripple"></span>
+					<span class="mdc-floating-label" id="label-before">Occured Before</span>
+					<input id="before" class="mdc-text-field__input" type="date" aria-labelledby="label-before">
+					<span class="mdc-line-ripple"></span>
+				</label>
+
+				<label class="mdc-text-field mdc-text-field--filled">
+					<span class="mdc-text-field__ripple"></span>
+					<span class="mdc-floating-label" id="label-after">Occured After</span>
+					<input id="after" class="mdc-text-field__input" type="date" aria-labelledby="label-after">
+					<span class="mdc-line-ripple"></span>
+				</label>
+
+				<!-- Checkbox Div -->
+				<h2>Incident type:</h2>
+				<div id="checkboxDiv">
+					<!-- CheckBox 1 -->
+					<div class="mdc-form-field">
+						<div class="mdc-checkbox">
+							<input type="checkbox" class="mdc-checkbox__native-control" id="crash"/>
+							<div class="mdc-checkbox__background">
+								<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+									<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+								</svg>
+								<div class="mdc-checkbox__mixedmark"></div>
+							</div>
+							<div class="mdc-checkbox__ripple"></div>
 						</div>
-						<div class="mdc-checkbox__ripple"></div>
+						<label for="checkbox-1">Crash</label>
 					</div>
-					<label for="checkbox-1">Crash</label>
-				</div>
-				<!-- CheckBox 1 -->
-				<!-- CheckBox 2 -->
-				<div class="mdc-form-field">
-					<div class="mdc-checkbox">
-						<input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-1"/>
-						<div class="mdc-checkbox__background">
-							<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-								<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-							</svg>
-							<div class="mdc-checkbox__mixedmark"></div>
+					<!-- CheckBox 1  End -->
+					<!-- CheckBox 2 -->
+					<div class="mdc-form-field">
+						<div class="mdc-checkbox">
+							<input type="checkbox" class="mdc-checkbox__native-control" id="hazard"/>
+							<div class="mdc-checkbox__background">
+								<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+									<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+								</svg>
+								<div class="mdc-checkbox__mixedmark"></div>
+							</div>
+							<div class="mdc-checkbox__ripple"></div>
 						</div>
-						<div class="mdc-checkbox__ripple"></div>
+						<label for="checkbox-1">Hazard</label>
 					</div>
-					<label for="checkbox-1">Hazard</label>
-				</div>
-				<!-- CheckBox 2 -->
-				<!-- CheckBox 3 -->
-				<div class="mdc-form-field">
-					<div class="mdc-checkbox">
-						<input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-1"/>
-						<div class="mdc-checkbox__background">
-							<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-								<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-							</svg>
-							<div class="mdc-checkbox__mixedmark"></div>
+					<!-- CheckBox 2  End -->
+					<!-- CheckBox 3 -->
+					<div class="mdc-form-field">
+						<div class="mdc-checkbox">
+							<input type="checkbox" class="mdc-checkbox__native-control" id="theft"/>
+							<div class="mdc-checkbox__background">
+								<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+									<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+								</svg>
+								<div class="mdc-checkbox__mixedmark"></div>
+							</div>
+							<div class="mdc-checkbox__ripple"></div>
 						</div>
-						<div class="mdc-checkbox__ripple"></div>
+						<label for="checkbox-1">Theft</label>
 					</div>
-					<label for="checkbox-1">Theft</label>
-				</div>
-				<!-- CheckBox 3 -->
-				<!-- CheckBox 3 -->
-				<div class="mdc-form-field">
-					<div class="mdc-checkbox">
-						<input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-1"/>
-						<div class="mdc-checkbox__background">
-							<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-								<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-							</svg>
-							<div class="mdc-checkbox__mixedmark"></div>
+					<!-- CheckBox 3 End -->
+					<!-- CheckBox 4 -->
+					<div class="mdc-form-field">
+						<div class="mdc-checkbox">
+							<input type="checkbox" class="mdc-checkbox__native-control" id="unconfirmed"/>
+							<div class="mdc-checkbox__background">
+								<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+									<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+								</svg>
+								<div class="mdc-checkbox__mixedmark"></div>
+							</div>
+							<div class="mdc-checkbox__ripple"></div>
 						</div>
-						<div class="mdc-checkbox__ripple"></div>
+						<label for="checkbox-1">Unconfirmed</label>
 					</div>
-					<label for="checkbox-1">Unconfirmed</label>
+					<!-- CheckBox 4 End -->
 				</div>
-				<!-- CheckBox 3 -->
-				<br>
+				<!-- Checkbox Div End -->
+
 				<button class="mdc-button mdc-button--raised foo-button">
-					<span class="mdc-button__label">Show SnackBar</span>
+					<span class="mdc-button__label">List Incidents</span>
 				</button>
 
-				<div class="mdc-snackbar">
-					<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
-						<div class="mdc-snackbar__label center" aria-atomic="false">
-							Nothing was entered
-						</div>
-					</div>
-				</div>
 			</div>
 			<!-- Input Page End -->
 
@@ -210,8 +222,8 @@
 					    	center: Chicago,
 					    });
 					  }
-					</script>
-				</div>
+				</script>
+			</div>
 				<!-- Map Page End-->
 			</main>
 		</div>
@@ -257,6 +269,7 @@
 			for(i = 0; i < json.incidents.length; i++){
 				let copy = originalCard.cloneNode(true);
 				copy.querySelector(".mdc-card__title").innerHTML = json.incidents[i].title;
+				copy.querySelector(".mdc-card__type").innerHTML = json.incidents[i].type;
 				let unix = json.incidents[i].occurred_at;
 				var date = new Date(unix*1000);
 				var minute = date.getMinutes();
