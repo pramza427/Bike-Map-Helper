@@ -16,8 +16,24 @@ body {
   width: 100%;
   margin: 0px;
 }
-#Map{
-	height: 100%;
+
+.button-row {
+  text-align: center;
+  margin: auto;
+  padding: 16px;
+}
+#crash-toggle {
+  background-color: blue;
+}
+#hazard-toggle {
+  background-color: #C9B713;
+}
+#theft-toggle {
+  background-color: red;
+}
+
+#MapDiv{
+	height: 95%;
 }
 
 .mdc-text-field{
@@ -28,9 +44,11 @@ body {
   overflow: auto;
   position: relative;
 }
-
+.mdc-top-app-bar--fixed-adjust.mypage {
+  padding-top: 34px;
+}
 .main-content {
-	margin: 5%; 
+  margin: 5%;
 	height: 90%;
 }
 
@@ -47,6 +65,7 @@ body {
   padding-left: 16px;
 }
 
+/* Card Formatting */
 .mdc-card {
   margin: 16px;
 }
