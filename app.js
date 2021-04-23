@@ -118,6 +118,7 @@ function populateCards(url, page){
 	.then(json => {
 		let i = 0;
 		let originalCard = document.querySelector("#list-card");
+		document.querySelector("#"+page+"Results").innerHTML = "";
 		for(i = 0; i < json.incidents.length; i++){
 			let copy = originalCard.cloneNode(true);
 			copy.style.display = "block";
@@ -133,6 +134,7 @@ function populateCards(url, page){
 			copy.querySelector(".mdc-card__subtitle").innerHTML = formatedDate;
 			copy.querySelector(".mdc-card__address").innerHTML = json.incidents[i].address;
 			copy.querySelector(".mdc-card__description").innerHTML = json.incidents[i].description;
+			
 			document.querySelector("#"+page+"Results").appendChild(copy);
 			console.log("added: " + copy);
 
@@ -189,15 +191,15 @@ function populateCards(url, page){
 }
 
 function populateMap(url){
-	crashMarkers.forEach(x => {x.setMap=null});
+	crashMarkers.forEach(x => {x.setMap(null);});
 	crashMarkers = [];
-	hazardMarkers.forEach(x => {x.setMap=null});
+	hazardMarkers.forEach(x => {x.setMap(null);});
 	hazardMarkers = [];
-	theftMarkers.forEach(x => {x.setMap=null});
+	theftMarkers.forEach(x => {x.setMap(null);});
 	theftMarkers = [];
-	unconfirmedMarkers.forEach(x => {x.setMap=null});
+	unconfirmedMarkers.forEach(x => {x.setMap(null);});
 	unconfirmedMarkers = [];
-	rackMarkers.forEach(x => {x.setMap=null});
+	rackMarkers.forEach(x => {x.setMap(null);});
 	rackMarkers = [];
 	fetch(url)
 	.then(x => {
@@ -223,7 +225,6 @@ function addMarker(cords, mytitle){
 	var marker = new google.maps.Marker({
 		position: cords,
 		map: myMap,
-		fill_color: "blue",
 		title: mytitle,
 	});
 	let infowindow = new google.maps.InfoWindow({
