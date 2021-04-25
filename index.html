@@ -31,7 +31,11 @@
 			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
 				<button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
 				<span class="mdc-top-app-bar__title">Biking Helper</span>
+				
 			</section>
+			<button class="mdc-button mdc-button--raised location-button">
+					<span class="mdc-button__label">Find bike racks near me</span>
+			</button>
 		</div>
 	</header>
 	<!-- Top NavBar End -->
@@ -239,14 +243,17 @@
 			<!-- Map Page Start-->
 			<div class="mdc-top-app-bar--fixed-adjust myPage" id="Map" style="display: none;">
 				<div class="button-row">
-					<button class="mdc-button mdc-button--raised toggle" id="crash-toggle">
+					<button class="mdc-button mdc-button--raised map-toggle show" id="crash">
 						<span class="mdc-button__label">crash</span>
 					</button>
-					<button class="mdc-button mdc-button--raised toggle" id="hazard-toggle">
+					<button class="mdc-button mdc-button--raised map-toggle show" id="hazard">
 						<span class="mdc-button__label">hazard</span>
 					</button>
-					<button class="mdc-button mdc-button--raised toggle" id="theft-toggle">
+					<button class="mdc-button mdc-button--raised map-toggle show" id="theft">
 						<span class="mdc-button__label">theft</span>
+					</button>
+					<button class="mdc-button mdc-button--raised map-toggle show" id="unconfirmed">
+						<span class="mdc-button__label">unconfirmed</span>
 					</button>
 				</div>
 				<!-- initailize Google Map -->

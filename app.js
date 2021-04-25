@@ -26,9 +26,14 @@ topAppBar.listen('MDCTopAppBar:nav', () => {
 });
 
 // checkbox and form
-const checkbox = new mdc.checkbox.MDCCheckbox(document.querySelector('.mdc-checkbox'));
+
+const checkboxs = document.querySelectorAll('.mdc-checkbox');
+var mdcCheckboxs = []
+checkboxs.forEach(box => {
+	var newBox = new mdc.checkbox.MDCCheckbox(box);
+	mdcCheckboxs.push(newBox);
+})
 const formField = new mdc.formField.MDCFormField(document.querySelector('.mdc-form-field'));
-formField.input = checkbox;
 
 // Left bar list and listener
 const listEl = document.querySelector('.mdc-drawer .mdc-list');
@@ -40,6 +45,32 @@ document.body.addEventListener('MDCDrawer:closed', () => {
 
 // click Listener for Filter's list button
 document.querySelector(".list-button").addEventListener("click", evt => {
+
+	urlToMap();
+	document.querySelector("#drawerList").click();
+
+});
+// click Listener for Filter's map button
+document.querySelector(".map-button").addEventListener("click", evt => {
+
+	urlToMap();
+	document.querySelector("#drawerMap").click();
+
+});
+
+var links = document.querySelectorAll(".mdc-list-item");
+links.forEach( link => {
+	link.addEventListener("click", e => {
+		var name = link.getAttribute("data-toScreen");
+		document.querySelectorAll(".myPage").forEach(page => { 
+			page.style.display = "none";
+		});
+		document.querySelector(".myPage#" + name).style.display = "block";
+
+	});
+});
+
+function urlToMap(){
 	// Read inputs
 	inLocation = document.querySelector("#location").value;
 	var afterUTC = "0";
@@ -59,24 +90,30 @@ document.querySelector(".list-button").addEventListener("click", evt => {
 		afterDate = inAfter.split("-")
 		afterUTC = (Date.UTC(afterDate[0], afterDate[1], afterDate[2])/1000).toString();
 	}
+	var incidentTypes = [];
+
+	mdcCheckboxs.forEach(check => {
+		if(check.checked){
+			incidentTypes.push(check.root.firstElementChild.id);
+		}
+	});
+	console.log(incidentTypes);
+	var urlLimit = "30";
+	if(incidentTypes.length === 0);
+		urlLimit = "60";
+
 		// Create URL
-		console.log(inLocation, inProximity, beforeUTC, afterUTC);
-		var listurl = "https://bikewise.org/api/v2/incidents?page=1&per_page=20";
 		var mapurl = "https://bikewise.org/api/v2/locations/markers?";
 		if(beforeUTC != "0"){
-			listurl += "&occurred_before=" + beforeUTC;
 			mapurl += "&occurred_before=" + beforeUTC;
 		}
 		if(afterUTC != "0"){
-			listurl += "&occurred_after=" + afterUTC;
 			mapurl += "&occurred_after=" + afterUTC;
 		}
 		
-		listurl += "&proximity=" + inLocation;
 		mapurl += "&proximity=" + inLocation;
-		listurl += "&proximity_square=" + inProximity;
 		mapurl += "&proximity_square=" + inProximity;
-		mapurl += "&limit=60";
+		mapurl += "&limit="+urlLimit;
 		
 
 		// Change Description in Filter Page
@@ -93,25 +130,10 @@ document.querySelector(".list-button").addEventListener("click", evt => {
 		document.querySelector("#list-desc").innerHTML = descText;
 
 		document.querySelector("#ListResults").innerHTML = "";
-		populateMap(mapurl);
-		document.querySelector("#drawerList").click();
-
-	});
-
-var links = document.querySelectorAll(".mdc-list-item");
-links.forEach( link => {
-	link.addEventListener("click", e => {
-		var name = link.getAttribute("data-toScreen");
-		document.querySelectorAll(".myPage").forEach(page => { 
-			page.style.display = "none";
-		});
-		document.querySelector(".myPage#" + name).style.display = "block";
-
-	});
-});
+		populateMap(mapurl, incidentTypes);
+}
 
 function populateCards(url, page){
-	console.log(url);
 	fetch (url)
 	.then(x => { 
 		return x.json()
@@ -119,7 +141,6 @@ function populateCards(url, page){
 	.then(json => {
 		let i = 0;
 		let originalCard = document.querySelector("#list-card");
-		document.querySelector("#"+page+"Results").innerHTML = "";
 		for(i = 0; i < json.incidents.length; i++){
 			let copy = originalCard.cloneNode(true);
 			copy.style.display = "block";
@@ -137,7 +158,6 @@ function populateCards(url, page){
 			copy.querySelector(".mdc-card__description").innerHTML = json.incidents[i].description;
 			
 			document.querySelector("#"+page+"Results").appendChild(copy);
-			console.log("added: " + copy);
 
 			// When address is clicked, bring up map with that address
 			copy.querySelector(".mdc-card__address").addEventListener("click", evt => {
@@ -181,17 +201,16 @@ function populateCards(url, page){
 					// bring up map
 					document.querySelector("#drawerMap").click();
 				}	
-				console.log(zjson);
 			});
 	      	}); // end click listener
 
 		}
-		originalCard.remove();
 
 	});
 }
 
-const populateMap = async function(url){
+ function populateMap(url, showIncidents){
+	// clear the map and remove all previous markers
 	crashMarkers.forEach(x => {x.setMap(null);});
 	crashMarkers = [];
 	hazardMarkers.forEach(x => {x.setMap(null);});
@@ -202,28 +221,39 @@ const populateMap = async function(url){
 	unconfirmedMarkers = [];
 	rackMarkers.forEach(x => {x.setMap(null);});
 	rackMarkers = [];
-	fetch(url)
-	.then(x => {
-		return x.json();
-	}).then(json => {
-		console.log(json.features);
-		for(var i = 0; i < json.features.length; i++){
-			// find cords
-			var latitude = json.features[i].geometry.coordinates[1];
-			var longitude = json.features[i].geometry.coordinates[0];
-			var cords = { lat: latitude, lng: longitude};
-		    // choose a color for the marker based on 
-		    //var color = "red";
-		    //switch(json.features[i].)
-		    var id = json.features[i].properties.id.toString();
-		    addCardtoList(id, cords);
-	    		
-		}
-	});
+
+	if(showIncidents.length === 0){
+		addAlltoList(url);
+	}
+	showIncidents.forEach(incident => {
+		var newUrl = url + "&incident_type=" + incident;
+		document.querySelector(".map-toggle#"+incident).classList.add("show");
+		addAlltoList(newUrl);
+	})
+
+	function addAlltoList(url){
+		fetch(url)
+		.then(x => {
+			return x.json();
+		}).then(json => {
+			for(var i = 0; i < json.features.length; i++){
+				// find cords
+				var latitude = json.features[i].geometry.coordinates[1];
+				var longitude = json.features[i].geometry.coordinates[0];
+				var cords = { lat: latitude, lng: longitude};
+			    // choose a color for the marker based on 
+			    //var color = "red";
+			    //switch(json.features[i].)
+			    var id = json.features[i].properties.id.toString();
+			    addCardtoList(id, cords);
+		    		
+			}
+		});
+	}
+	
 }
 const addCardtoList = async function(id, _cords){
 	var url = "https://bikewise.org/api/v2/incidents/"+id;
-	console.log(url);
 	var returnValue = [];
 	fetch (url)
 	.then(x => { 
@@ -294,7 +324,6 @@ const addCardtoList = async function(id, _cords){
 			});
 	      	}); // end click listener
 		
-		originalCard.remove();
 		returnValue.push(copy.innerHTML);
 		returnValue.push(json.incident.type);
 		addMarker(_cords, returnValue);	
@@ -342,9 +371,74 @@ function addMarker(cords, valArray){
 		infowindow.open(myMap, marker);
 	});
 
-	crashMarkers.push(marker);
-	
+	switch(incidentType){
+		case "Theft":
+			theftMarkers.push(marker);
+			break;
+		case "Hazard":
+			hazardMarkers.push(marker);
+			break;
+		case "Crash":
+			crashMarkers.push(marker);
+			break;
+		case "Unconfirmed":
+			unconfirmedMarkers.push(marker);
+			break;
+		default:
+			unconfirmedMarkers.push(marker);		
+			break;
+	}
 }
+
+// Click listeners for toggles above map
+document.querySelectorAll(".map-toggle").forEach(button => {
+	button.addEventListener("click", evt => {
+		var type = button.id;
+		switch (type){
+			case "crash":
+				if(evt.target.classList.contains("show")){
+					crashMarkers.forEach(marker => {marker.setMap(null)});
+					evt.target.classList.remove("show");
+				}
+				else{
+					crashMarkers.forEach(marker => {marker.setMap(myMap)});
+					evt.target.classList.add("show");
+				}
+				break;
+			case "hazard":
+				if(evt.target.classList.contains("show")){
+					hazardMarkers.forEach(marker => {marker.setMap(null)});
+					evt.target.classList.remove("show");
+				}
+				else{
+					hazardMarkers.forEach(marker => {marker.setMap(myMap)});
+					evt.target.classList.add("show");
+				}
+				break;
+			case "theft":
+				if(evt.target.classList.contains("show")){
+					theftMarkers.forEach(marker => {marker.setMap(null)});
+					evt.target.classList.remove("show");
+				}
+				else{
+					theftMarkers.forEach(marker => {marker.setMap(myMap)});
+					evt.target.classList.add("show");
+				}
+				break;
+			case "unconfirmed":
+				if(evt.target.classList.contains("show")){
+					unconfirmedMarkers.forEach(marker => {marker.setMap(null)});
+					evt.target.classList.remove("show");
+				}
+				else{
+					unconfirmedMarkers.forEach(marker => {marker.setMap(myMap)});
+					evt.target.classList.add("show");
+				}
+				break;
+		}
+	});
+}); //end of toggle click listener
+
 // Create a database
 const db = new Dexie('My Database');
 db.version(3).stores({

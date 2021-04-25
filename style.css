@@ -20,22 +20,32 @@ body {
 .button-row {
   text-align: center;
   margin: auto;
-  padding: 16px;
+  padding: 8px 12px;
 }
-#crash-toggle {
+.map-toggle#crash {
   background-color: blue;
 }
-#hazard-toggle {
+.map-toggle#hazard {
   background-color: #C9B713;
 }
-#theft-toggle {
+.map-toggle#theft {
   background-color: red;
 }
+.map-toggle#unconfirmed {
+  background-color: #6200EE
+}
+
+
 
 #MapDiv{
 	height: 95%;
 }
-
+.mdc-button.location-button {
+  background-color: blue;
+  float: right;
+  margin: auto;
+  margin-right: 12px;
+}
 .mdc-text-field{
 	margin: 16px;
 }
@@ -45,7 +55,7 @@ body {
   position: relative;
 }
 .mdc-top-app-bar--fixed-adjust.mypage {
-  padding-top: 34px;
+  padding-top: 35px;
 }
 .main-content {
   margin: 5%;
