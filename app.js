@@ -76,7 +76,7 @@ document.querySelector(".list-button").addEventListener("click", evt => {
 		mapurl += "&proximity=" + inLocation;
 		listurl += "&proximity_square=" + inProximity;
 		mapurl += "&proximity_square=" + inProximity;
-		mapurl += "&limit=20";
+		mapurl += "&limit=60";
 		
 
 		// Change Description in Filter Page
@@ -304,8 +304,6 @@ const addCardtoList = async function(id, _cords){
 function addMarker(cords, valArray){
 	var innerText = valArray[0];
 	var incidentType = valArray[1];
-	console.log(valArray);
-	console.log(incidentType);
 
 	// choose icon for marker
 	var urlBase = "http://maps.google.com/mapfiles/ms/icons/";
