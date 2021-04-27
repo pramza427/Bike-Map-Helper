@@ -33,7 +33,7 @@
 				<span class="mdc-top-app-bar__title">Biking Helper</span>
 				
 			</section>
-			<button class="mdc-button mdc-button--raised location-button">
+			<button id="showRacksNear" class="mdc-button mdc-button--raised location-button">
 					<span class="mdc-button__label">Find bike racks near me</span>
 			</button>
 		</div>
@@ -283,34 +283,10 @@
 
 	<!-- My Script -->
 	<script src="app.js"></script>
-	<script type="text/javascript">
+	<script type="text/javascript">		
 
-	/* 
-	db.racks.where("ward").equals("2").each(function(rack){
-   	// place marker at cords
-   	var cords = { lat: rack.latitude, lng: rack.longitude};
-   	var marker = new google.maps.Marker({
-   		position: cords,
-   		map: myMap,
-   	});
-   	let infowindow = new google.maps.InfoWindow({
-   		content: rack.address
-   	})
-
-   	marker.addListener("click", () => {
-   		infowindow.open(myMap, marker);
-   	});
-
-   });*/
-		
-		
-		
-
-		// populate news cards
-		let file="https://bikewise.org:443/api/v2/incidents?page=1&proximity=Chicago%2C%20IL&proximity_square=30"
+	// populate news cards
+	let file="https://bikewise.org:443/api/v2/incidents?page=1&proximity=Chicago%2C%20IL&proximity_square=30"
 		populateCards(file, "News");
-
 		
-
-
   </script>

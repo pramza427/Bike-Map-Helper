@@ -43,6 +43,65 @@ document.body.addEventListener('MDCDrawer:closed', () => {
 	mainContentEl.querySelector('input, button').focus();
 });
 
+// click Listener for Show bike racks near me
+document.querySelector("#showRacksNear").addEventListener("click", evt =>{
+	if(!navigator.geolocation) {
+    	alert('Geolocation is not supported by your browser');
+  	} else {
+    	navigator.geolocation.getCurrentPosition(foundPosition, error);
+  	}
+});
+// success function for rack location getter
+function foundPosition(position){
+	const latitude  = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    var cords = { lat: 41.8781, lng: -87.6298};
+    myMap.setCenter(cords);
+    myMap.setZoom(15);
+    
+    new google.maps.Circle({
+    	strokeColor: "#FF0000",
+      	fillColor: "#FF0000",
+    	map: myMap,
+    	center: cords,
+    	radius: 30,
+    });
+    showRacksAround(cords, 1);
+
+    document.querySelector("#drawerMap").click();
+}
+function error(){
+	alert("Unable to get your position");
+}
+// function that shows bike racks around a location 
+function showRacksAround(location, miles){
+	var distance = miles/120;
+	rackMarkers.forEach(marker => {marker.setMap(null);});
+	rackMarkers = [];
+	db.racks.where('latitude')
+			.between(location.lat-distance, location.lat+distance)
+			.and(x => { return x.longitude >= location.lng-distance 
+							   && x.longitude <= location.lng+distance})
+			.each(function(rack){
+		var cords = { lat: rack.latitude, lng: rack.longitude};
+   		var marker = new google.maps.Marker({
+   			position: cords,
+   			map: myMap,
+   			icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+   		});
+   		let infowindow = new google.maps.InfoWindow({
+   			content: "<h2>Bike Rack</h2>" + rack.address
+   		})
+
+   		marker.addListener("click", () => {
+   			infowindow.open(myMap, marker);
+   		});
+
+   		rackMarkers.push(marker);
+   	});
+}
+
 // click Listener for Filter's list button
 document.querySelector(".list-button").addEventListener("click", evt => {
 
@@ -58,6 +117,7 @@ document.querySelector(".map-button").addEventListener("click", evt => {
 
 });
 
+// button listener for all links in side bar
 var links = document.querySelectorAll(".mdc-list-item");
 links.forEach( link => {
 	link.addEventListener("click", e => {
@@ -70,6 +130,7 @@ links.forEach( link => {
 	});
 });
 
+// gets url then populates maps and list with returned json
 function urlToMap(){
 	// Read inputs
 	inLocation = document.querySelector("#location").value;
@@ -173,39 +234,37 @@ function populateCards(url, page){
 	         	})
 	         	.then(zjson => {
 	         		if(zjson.status === "OK"){
-		          	// remove old marker if there
-		          	if(mapMarkerNews != null){
-		          		mapMarkerNews.setMap(null);
-		          	}
-		            //set new cords
-		            var latitude = zjson.results[0].geometry.location.lat;
-		            var longitude = zjson.results[0].geometry.location.lng;
-		            var cords = { lat: latitude, lng: longitude};
-		            myMap.setCenter(cords);
+			          	// remove old marker if there
+			          	if(mapMarkerNews != null){
+			          		mapMarkerNews.setMap(null);
+			          	}
+			            //set new cords
+			            var latitude = zjson.results[0].geometry.location.lat;
+			            var longitude = zjson.results[0].geometry.location.lng;
+			            var cords = { lat: latitude, lng: longitude};
+			            myMap.setCenter(cords);
 
-					// place marker at cords
-					var marker = new google.maps.Marker({
-						position: cords,
-						map: myMap,
-						title: "address",
-					});
-					mapMarkerNews = marker;
+						// place marker at cords
+						var marker = new google.maps.Marker({
+							position: cords,
+							map: myMap,
+							title: "address",
+						});
+						mapMarkerNews = marker;
 
-					let infowindow = new google.maps.InfoWindow({
-						content: copy.innerHTML
-					});
+						let infowindow = new google.maps.InfoWindow({
+							content: copy.innerHTML
+						});
 
-					marker.addListener("click", () => {
-						infowindow.open(myMap, marker);
-					});
-					// bring up map
-					document.querySelector("#drawerMap").click();
-				}	
-			});
+						marker.addListener("click", () => {
+							infowindow.open(myMap, marker);
+						});
+						// bring up map
+						document.querySelector("#drawerMap").click();
+					}	
+				});
 	      	}); // end click listener
-
 		}
-
 	});
 }
 
@@ -441,8 +500,8 @@ document.querySelectorAll(".map-toggle").forEach(button => {
 
 // Create a database
 const db = new Dexie('My Database');
-db.version(3).stores({
-	racks: 'address,ward,latitude, longitude, name'
+db.version(6).stores({
+	racks: 'address, latitude, longitude, [latitude+longitude]'
 });
 
 // get the Schools data and populate the database
@@ -451,10 +510,8 @@ fetch("https://data.cityofchicago.org/resource/cbyb-69xx.json")
 .then ( (result) => {
 	for(rack of result){
 		db.racks.put({address: rack.address, 	
-			ward: rack.ward, 
-			latitude: parseFloat(rack.latitude),
-			longitude: parseFloat(rack.longitude),
-			name: rack.community_name});		
+		latitude: parseFloat(rack.latitude),
+		longitude: parseFloat(rack.longitude)});		
 	}
 });
 
