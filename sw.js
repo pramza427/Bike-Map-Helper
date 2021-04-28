@@ -3,7 +3,7 @@ let urlsToCache = [
   './',
   './manifest.json',
   './app.js',
-  './package-lock.json',
+  './style.css'
   './png/Bike_icon.png',
   './png/favicon.png'
 ];
