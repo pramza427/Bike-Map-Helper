@@ -292,7 +292,7 @@
 	<script type="text/javascript">		
 		if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+        navigator.serviceWorker.register('sw.js').then(function(registration) {
           // Registration was successful
           console.log('ServiceWorker registration successful with scope: ', registration.scope);
         }, function(err) {
@@ -305,5 +305,5 @@
 	let file="https://bikewise.org:443/api/v2/incidents?page=1&proximity=Chicago%2C%20IL&proximity_square=30"
 		populateCards(file, "News");
 		
-	
+
   </script>

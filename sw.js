@@ -1,6 +1,6 @@
 
 
-let CACHE_NAME = 'my-site-cache-v1';
+let CACHE_NAME = 'bike-helper-cache-v1';
 let urlsToCache = [
   './',
   './manifest.json',
