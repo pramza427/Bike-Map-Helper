@@ -4,7 +4,8 @@ let urlsToCache = [
   './manifest.json',
   './app.js',
   './package-lock.json',
-  './png/Bike_icon.png'
+  './png/Bike_icon.png',
+  './png/favicon.png'
 ];
 
 
