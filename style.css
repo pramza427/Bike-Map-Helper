@@ -9,7 +9,10 @@
 @include list.core-styles;
 @include icon-button.core-styles;
 
-
+html{
+  height: 100%;
+  width: 100%;
+}
 body {
   display: flex;
   height: 100%;
@@ -21,6 +24,12 @@ body {
   text-align: center;
   margin: auto;
   padding: 8px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.map-toggle{
+  margin: 12px;
 }
 .map-toggle#crash {
   background-color: blue;
@@ -32,11 +41,16 @@ body {
   background-color: red;
 }
 .map-toggle#unconfirmed {
-  background-color: #6200EE
+  background-color: #6200EE;
+}
+.map-toggle#racks {
+  background-color: #00ca44;
 }
 
-
-
+#Map{
+  height: 100%;
+  width:100%;
+}
 #MapDiv{
 	height: 95%;
 }
@@ -44,7 +58,12 @@ body {
   background-color: blue;
   float: right;
   margin: auto;
-  margin-right: 12px;
+  margin-right: 20px;
+}
+.mdc-button.location-button-form {
+  background-color: blue;
+  margin: auto;
+  margin-left: 12px;
 }
 .mdc-text-field{
 	margin: 16px;

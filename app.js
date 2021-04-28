@@ -79,6 +79,7 @@ function success(position){
     showRacksAround(cords, 1);
 
     document.querySelector("#drawerMap").click();
+    
 }
 // success function for getting user location in form
 
@@ -96,8 +97,17 @@ function error(){
 }
 // function that shows bike racks around a location 
 function showRacksAround(location, miles){
-	var distance = miles/120;
-	rackMarkers.forEach(marker => {marker.setMap(null);});
+	var distance = miles/30;
+	// clear the map and remove all previous markers
+	crashMarkers.forEach(x => {x.setMap(null);});
+	crashMarkers = [];
+	hazardMarkers.forEach(x => {x.setMap(null);});
+	hazardMarkers = [];
+	theftMarkers.forEach(x => {x.setMap(null);});
+	theftMarkers = [];
+	unconfirmedMarkers.forEach(x => {x.setMap(null);});
+	unconfirmedMarkers = [];
+	rackMarkers.forEach(x => {x.setMap(null);});
 	rackMarkers = [];
 	db.racks.where('latitude')
 			.between(location.lat-distance, location.lat+distance)
@@ -120,6 +130,10 @@ function showRacksAround(location, miles){
 
    		rackMarkers.push(marker);
    	});
+	// alert user if no bike racks were found
+	if(rackMarkers.length === 0){
+    	alert("No Bike Racks found within 3 miles. Sorry.");
+    }
 }
 
 // click Listener for Filter's list button
@@ -152,6 +166,7 @@ links.forEach( link => {
 
 // gets url then populates maps and list with returned json
 function urlToMap(){
+	var wantsRacks = false;
 	// Read inputs
 	inLocation = document.querySelector("#location").value;
 	var afterUTC = "0";
