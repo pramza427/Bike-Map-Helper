@@ -1,6 +1,7 @@
 let CACHE_NAME = 'bike-helper-cache-v1';
 let urlsToCache = [
   './',
+  './manifest.json',
   './app.js',
   './style.css',
   './pngs/Bike_icon.png',
