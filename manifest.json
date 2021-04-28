@@ -1,0 +1,17 @@
+{
+    "theme_color": "#6200ee",
+    "background_color": "#00EED9",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "app_name": "Biking Helper",
+    "short_name": "Proj3",
+    "description": "Helps users find biking incidents and bike racks",
+    "icons": [
+        {
+            "src": "/pngs/Bike_icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}

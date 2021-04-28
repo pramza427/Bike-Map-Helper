@@ -48,15 +48,24 @@ document.querySelector("#showRacksNear").addEventListener("click", evt =>{
 	if(!navigator.geolocation) {
     	alert('Geolocation is not supported by your browser');
   	} else {
+    	navigator.geolocation.getCurrentPosition(success, error);
+  	}
+});
+//click Listener for user current location button in filters
+document.querySelector("#userLocation").addEventListener("click", evt => {
+	if(!navigator.geolocation) {
+    	alert('Geolocation is not supported by your browser');
+  	} else {
     	navigator.geolocation.getCurrentPosition(foundPosition, error);
   	}
 });
+
 // success function for rack location getter
-function foundPosition(position){
+function success(position){
 	const latitude  = position.coords.latitude;
     const longitude = position.coords.longitude;
 
-    var cords = { lat: 41.8781, lng: -87.6298};
+    var cords = { lat: latitude, lng: longitude};
     myMap.setCenter(cords);
     myMap.setZoom(15);
     
@@ -70,6 +79,17 @@ function foundPosition(position){
     showRacksAround(cords, 1);
 
     document.querySelector("#drawerMap").click();
+}
+// success function for getting user location in form
+
+function foundPosition(position){
+	const latitude  = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    var cords = { lat: latitude, lng: longitude};
+
+    document.querySelector("#location").value = latitude + ", " + longitude;
+    document.querySelector("#proximity").value = "5";
 }
 function error(){
 	alert("Unable to get your position");
@@ -176,16 +196,16 @@ function urlToMap(){
 		mapurl += "&proximity_square=" + inProximity;
 		mapurl += "&limit="+urlLimit;
 		
-
+		console.log(beforeUTC);
 		// Change Description in Filter Page
 		var descText = "Showing results for " + inLocation + " within " + inProximity + " miles";
 		if(beforeUTC != "0" && afterUTC != "0"){
 			descText += " between " + inBefore + " and " + inAfter;
 		}
-		else if(beforeUTC != ""){
+		else if(beforeUTC != "0"){
 			descText += " before " + inBefore;
 		}
-		else if(afterUTC != ""){
+		else if(afterUTC != "0"){
 			descText += " after " + inAfter;
 		}
 		document.querySelector("#list-desc").innerHTML = descText;

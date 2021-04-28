@@ -111,7 +111,12 @@
 			<div class="mdc-top-app-bar--fixed-adjust myPage" id="Filters" style="display: none;">
 				<h3>Here you can filter what data you want to see using the filters bellow</h3>
 
-				<h2>Location:</h2>
+				<div style="display: flex">
+					<h2>Location:</h2>
+					<button id="showRacksNear" class="mdc-button mdc-button--raised location-button">
+					<span id="userLocation" class="mdc-button__label">Use current location</span>
+			</button>
+				</div>
 				<label class="mdc-text-field mdc-text-field--filled">
 					<span class="mdc-text-field__ripple"></span>
 					<span class="mdc-floating-label" id="label-location">Enter a location</span>
@@ -282,11 +287,23 @@
 	</html>
 
 	<!-- My Script -->
+	<link rel="manifest" href="manifest.json">
 	<script src="app.js"></script>
 	<script type="text/javascript">		
-
+		if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+          // Registration was successful
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+          // registration failed :(
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
 	// populate news cards
 	let file="https://bikewise.org:443/api/v2/incidents?page=1&proximity=Chicago%2C%20IL&proximity_square=30"
 		populateCards(file, "News");
 		
+	
   </script>
