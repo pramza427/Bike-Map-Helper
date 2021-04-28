@@ -9,7 +9,7 @@
     "description": "Helps users find biking incidents and bike racks",
     "icons": [
         {
-            "src": "/pngs/Bike_icon.png",
+            "src": "./pngs/Bike_icon.png",
             "sizes": "192x192",
             "type": "image/png"
         }
