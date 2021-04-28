@@ -6,7 +6,7 @@ let urlsToCache = [
   './manifest.json',
   './app.js',
   './package-lock.json',
-  './png/Bike_icon.png'
+  './png/Bike_icon.png',
   './node_modules'
 ];
 
